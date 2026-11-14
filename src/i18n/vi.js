@@ -23,6 +23,11 @@ export const VI = {
   Language: 'Ngôn ngữ',
   LANGUAGE: 'NGÔN NGỮ',
 
+  // link to the companion site (project name stays in English)
+  'Also from this crew:': 'Cùng đội ngũ thực hiện:',
+  'SISTER MISSION': 'NHIỆM VỤ ANH EM',
+  'Another Solar System journey by the same crew · opens in a new tab': 'Một hành trình Hệ Mặt Trời khác của cùng đội ngũ · mở trong tab mới',
+
   // top HUD
   'EXPLORATION MODE': 'CHẾ ĐỘ THÁM HIỂM',
   TRANSIT: 'ĐANG DI CHUYỂN',

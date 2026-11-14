@@ -1,6 +1,7 @@
 import { useActions } from '../../hooks/useEngine.js';
 import { useT } from '../../i18n/index.js';
 import LanguageSwitch from '../Settings/LanguageSwitch.jsx';
+import SisterLink from '../Links/SisterLink.jsx';
 
 export default function IntroOverlay() {
   const actions = useActions();
@@ -20,6 +21,7 @@ export default function IntroOverlay() {
           <span>{t('ENTER THE UNIVERSE')}</span>
         </button>
         <p className="intro__note">{t('Sound begins when you enter · Best on a desktop with headphones')}</p>
+        <SisterLink variant="intro" />
       </div>
     </div>
   );

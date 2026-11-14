@@ -11,3 +11,4 @@ export const IconMap = () => (<svg {...base}><circle cx="12" cy="12" r="2" /><el
 export const IconHelp = () => (<svg {...base}><circle cx="12" cy="12" r="9" /><path d="M9.6 9.3a2.5 2.5 0 114 2c-.9.6-1.6 1.1-1.6 2.2M12 16.8v.2" /></svg>);
 export const IconClose = () => (<svg {...base} width={16} height={16}><path d="M6 6l12 12M18 6L6 18" /></svg>);
 export const IconChevron = () => (<svg {...base} width={14} height={14}><path d="M9 6l6 6-6 6" /></svg>);
+export const IconExternal = () => (<svg {...base} width={12} height={12}><path d="M14 4h6v6M20 4l-9 9" /><path d="M18 14v5a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h5" /></svg>);

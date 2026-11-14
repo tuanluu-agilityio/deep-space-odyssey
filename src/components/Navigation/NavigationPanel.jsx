@@ -5,6 +5,7 @@ import { useT, useLang, trTarget } from '../../i18n/index.js';
 import { DESTINATIONS } from '../../config/destinations.js';
 import { CELESTIAL } from '../../config/celestial.js';
 import { IconClose, IconChevron } from '../HUD/icons.jsx';
+import SisterLink from '../Links/SisterLink.jsx';
 
 const GROUPS = [['solar', 'SOLAR SYSTEM'], ['beyond', 'BEYOND']];
 
@@ -74,6 +75,7 @@ export default function NavigationPanel() {
       </ul>
       {sel && <DestinationBrief dest={sel} disabled={!!travel} here={sel.id === sectorId} onEngage={() => actions.engage(sel.id)} />}
       {!sel && <p className="fine nav__hint">{t('Select a destination to see the flight brief.')}</p>}
+      <SisterLink variant="nav" />
     </aside>
   );
 }
