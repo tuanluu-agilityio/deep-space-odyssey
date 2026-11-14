@@ -63,6 +63,9 @@ ul { list-style: none; }
 .panel { background: var(--glass); border: 1px solid var(--line-soft); backdrop-filter: blur(10px) saturate(1.2); -webkit-backdrop-filter: blur(10px) saturate(1.2); padding: 14px 16px; position: relative; }
 .panel::before { content: ''; position: absolute; left: -1px; top: -1px; width: 14px; height: 14px; border-left: 1px solid var(--cyan); border-top: 1px solid var(--cyan); }
 .panel::after { content: ''; position: absolute; right: -1px; bottom: -1px; width: 14px; height: 14px; border-right: 1px solid var(--cyan); border-bottom: 1px solid var(--cyan); }
+/* Scrolling panels: keep the brackets inside the box, otherwise they add 1px of overflow and a stray scrollbar. */
+.nav::before, .target::before { left: 0; top: 0; }
+.nav::after, .target::after { right: 0; bottom: 0; }
 .panel__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--line-soft); }
 .panel__head h2 { font-size: 12px; font-weight: 500; letter-spacing: 0.26em; color: var(--cyan); }
 .fine { font-size: 11px; line-height: 1.55; color: var(--muted); }
@@ -206,9 +209,12 @@ kbd { font: 10px var(--mono); padding: 1px 5px; border: 1px solid var(--line-sof
 .target__actions--one { grid-template-columns: 1fr; margin-top: 6px; }
 
 /* ── system map ──────────────────────────────────────────── */
-.map__box { width: min(1040px, 100%); max-height: calc(100vh - 32px); overflow: auto; background: rgba(4, 10, 18, 0.9); }
-.map__body { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 18px; align-items: start; }
-.map__svg { width: 100%; height: auto; max-height: calc(100vh - 130px); display: block; }
+/* The box itself must not scroll: its corner brackets (.panel::before/::after) sit 1px outside it, which made a
+   scrolling box overflow by 1px both ways, so scrollbars kept appearing and resizing the square map (flicker).
+   The body scrolls instead, with a reserved gutter so a scrollbar never changes the map's width. */
+.map__box { width: min(1040px, 100%); max-height: calc(100vh - 32px); display: flex; flex-direction: column; background: rgba(4, 10, 18, 0.9); }
+.map__body { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 18px; align-items: start; min-height: 0; overflow: hidden auto; scrollbar-gutter: stable; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+.map__svg { width: 100%; max-width: calc(100vh - 130px); aspect-ratio: 1; height: auto; margin-inline: auto; display: block; }
 .map__grid { stroke: rgba(143, 233, 255, 0.06); stroke-width: 1; }
 .map__orbit { fill: none; stroke: rgba(143, 233, 255, 0.22); stroke-width: 1; }
 .map__orbit.is-selected { stroke: var(--cyan); }
@@ -225,7 +231,8 @@ kbd { font: 10px var(--mono); padding: 1px 5px; border: 1px solid var(--line-sof
 .map__side .nav__brief { margin-top: 0; padding-top: 0; border-top: 0; }
 .map__note { border-top: 1px solid var(--line-soft); padding-top: 10px; }
 .map__out { color: var(--amber); }
-@media (max-width: 820px) { .map__body { grid-template-columns: 1fr; } }
+/* stacked: plain block flow, because a one-column grid inside the height-capped body squeezed the map row */
+@media (max-width: 820px) { .map__body { display: block; } .map__side { margin-top: 18px; } }
 
 /* link to the companion site */
 .sister { pointer-events: auto; color: var(--muted); text-decoration: none; transition: color 0.2s, border-color 0.2s, background 0.2s; }

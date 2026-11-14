@@ -92,3 +92,8 @@ Gap analysis recorded in PROJECT_STATUS.md. Decision: keep engine, store, cockpi
 - `src/components/Links/SisterLink.jsx`: link to Tuan's other project https://explore-solarsystem.netlify.app/ (new tab, `rel="noopener"`).
 - Shown on the intro screen under the start button, and pinned to the bottom of the navigation panel as "SISTER MISSION".
 - Vietnamese strings added to `vi.js`. Checked in headless Chromium at 1280×720 (EN and VI); not checked on phones.
+
+## 2026-11-14 — system map flicker fix
+- Cause: the cyan corner brackets (`.panel::before/::after`) sit 1px outside the panel. On `.map__box`, which had `overflow: auto`, that meant a permanent 1px overflow on both axes, so browsers with classic scrollbars (Windows) showed scrollbars right and bottom; the scrollbar narrowed the box, the square SVG map shrank, and the layout kept toggling (flicker). Present since the system map was added (f43c0ed); not caused by the companion-site link.
+- Fix (`src/styles.css`): the map box no longer scrolls; `.map__body` scrolls instead (`overflow: hidden auto`, `scrollbar-gutter: stable`, so a scrollbar can never change the map width). The navigation and target panels had the same 1px overflow; their brackets now sit inside the box.
+- Checked in headless Chromium at several window sizes (no overflow on the box; body scrolls only when content is really taller). Not checked on a real Windows/macOS browser.
