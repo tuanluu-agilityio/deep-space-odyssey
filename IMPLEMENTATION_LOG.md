@@ -87,3 +87,8 @@ Gap analysis recorded in PROJECT_STATUS.md. Decision: keep engine, store, cockpi
 - Sun was a white blob up close → glow sprite fades in close, surface gain lowered.
 - Orbit lines streaked across the windows from inside the ecliptic → opacity follows elevation above the plane.
 - Vietnamese added for every new string; nav rows no longer truncate names.
+
+## 2026-11-14 — link to the companion site
+- `src/components/Links/SisterLink.jsx`: link to Tuan's other project https://explore-solarsystem.netlify.app/ (new tab, `rel="noopener"`).
+- Shown on the intro screen under the start button, and pinned to the bottom of the navigation panel as "SISTER MISSION".
+- Vietnamese strings added to `vi.js`. Checked in headless Chromium at 1280×720 (EN and VI); not checked on phones.
